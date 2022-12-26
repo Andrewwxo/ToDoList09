@@ -1,6 +1,5 @@
 import {FilterValuesType, TodolistType} from '../App';
 import {v1} from 'uuid';
-import {removeTaskAC} from './tasks-reducer';
 
 export type RemoveTodolistActionType = ReturnType<typeof RemoveTodolistAC>
 
@@ -24,7 +23,7 @@ export const todolistsReducer = (state: Array<TodolistType>, action: ActionsType
         case 'REMOVE-TODOLIST':
             return state.filter(tl => tl.id != action.id)
         case 'ADD-TODOLIST':
-            return [...state, {id: v1(), title: action.title, filter: "all"}]
+            return [...state, {id: action.todolistId, title: action.title, filter: "all"}]
         case 'CHANGE-TODOLIST-TITLE': {
             const todolist = state.find(tl => tl.id === action.id);
             if (todolist) {
